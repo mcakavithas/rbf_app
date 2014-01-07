@@ -1,4 +1,16 @@
 Rbf::Application.routes.draw do
+  get "customer_pages/index"
+
+  get "customer_pages/new"
+
+  get "customer_pages/create"
+
+  get "customer_pages/update"
+
+  get "customer_pages/destroy"
+
+  get "customer_pages/show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

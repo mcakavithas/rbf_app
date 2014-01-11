@@ -1,0 +1,17 @@
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h5>
+               
+
+               <%= "Welcome to #{@customer.first_name}#{@customer.last_name}" %><br>
+                <%= "The Customer date of birth is #{@customer.dob} " %>
+				<%= "The customer age is #{((DateTime.now - @customer.dob) / 365.25).to_i}" %>
+      </h5>
+	<h5><%= link_to "Back to customers", customers_path %></h5>
+
+    </section>
+   
+  </aside>
+   </div>
+

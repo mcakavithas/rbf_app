@@ -1,15 +1,21 @@
 Rbf::Application.routes.draw do
-  get "customer_pages/index"
+  resources :customers
+#root to: 'customers#index'
 
-  get "customer_pages/new"
+  #match '/new',    to: 'customers#new'
+  #match '/show',   to: 'customers#show'
+ 
+  get "customers/index"
 
-  get "customer_pages/create"
+  get "customers/new"
 
-  get "customer_pages/update"
+  get "customers/create"
 
-  get "customer_pages/destroy"
+  get "customers/update"
 
-  get "customer_pages/show"
+  get "customers/destroy"
+
+  get "customers/show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -60,7 +66,7 @@ Rbf::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'customers#index'
 
   # See how all your routes lay out with "rake routes"
 

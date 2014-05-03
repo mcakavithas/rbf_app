@@ -1,0 +1,78 @@
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1
+{
+  color: #005580
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+}
+</style>
+
+<h1><%= link_to "Savings Deposit", savingsdeposits_path %></h1>
+
+<div>
+<%= link_to "Open Savings Deposit", new_savingsdeposit_path , class: "btn btn-primary" %> <div align = "right">
+
+<span class = "btn-group float-right" align = "right">
+  <a href = "/savingsdeposits" class = "btn-primary btn">Transaction Pending</a>
+  <button class ="btn dropdown-toggle" data-toggle= "dropdown">
+    <span class = "caret"></span>
+  </button>
+  <ul class = "dropdown-menu">
+    <% if current_user.role == 'manager' %>
+    <li>
+         <%= link_to 'Awaiting Approval',savingsdeposits_pending_path%>
+    </li>
+    <% end %>
+    <li>
+      <%= link_to "Closed", savingsdeposits_pending_path %>
+    </li>
+    </ul>
+</span>
+</div> 
+
+<br>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+	<tr >
+ 		<th>Account Type</th>
+		<th>Opened On</th>
+		<th>Current Balance</th>
+		<th>Customer Name</th>
+    <th>Status</th>
+
+  </tr>
+    <% @savingsdeposits.each do |savingsdeposit| %>
+    <tr>
+  	  <td><%= link_to "#{savingsdeposit.account_type}", savingsdeposit_path(savingsdeposit) %></td>
+      <td><%= savingsdeposit.opened_on %></td>
+      <td><%= savingsdeposit.current_balance %></td>
+      <td><%= link_to "#{savingsdeposit.customer.first_name}",customers_path if savingsdeposit.customer %></td>
+      <td>
+
+        <% if savingsdeposit.status == 'approved' %>
+        <span class="label label-success"><%= savingsdeposit.status %></span><i class="icon-hand-up"></i>
+        <% elsif savingsdeposit.status == 'Pending' %>
+        <span class="label label-mini btn-warning"><%= savingsdeposit.status %></span><i class="icon-hand-down"></i>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+</div>

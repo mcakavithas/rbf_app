@@ -1,0 +1,49 @@
+<%= form_for @savingsdeposit, :html => {:multipart => true} do |f| %>
+  
+ <% if @savingsdeposit.errors.any? %>
+<h4>savingsdeposit not added</h4>
+<ul>
+<% @savingsdeposit.errors.full_messages.each do |error| %>
+<li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
+<div id='body'>
+<div class='container'>
+<section id='flashMsg'>
+</section>
+<h1>
+<a href="/savingsdeposits" class="bc_section_head">Savings Deposit</a>
+</h1>
+<br>
+<h3>New Account</h3>
+<div class="string input optional stringish control-group">
+  <%= f.hidden_field :customer_id, :id => "real_customer_id" %>
+<%= f.label :Customer %>
+<div class="controls">
+  <%= autocomplete_field_tag 'throwaway_customer', '',
+          autocomplete_customer_first_name_savingsdeposits_path,
+          :size => 75, :id_element => '#real_customer_id', :placeholder => "customer" %>
+</div></div>
+
+<div class="string input optional stringish control-group">
+	<%= f.label :Initial_Deposit_Amount %><div class="controls"><%= f.text_field :current_balance, :placeholder => "0.00" %>
+</div></div>
+
+
+<div class="string input optional stringish control-group">
+	<%= f.label :account_type %><div class="controls">
+   <%= f.select(:account_type, options_for_select([['Individual', 'Individual'], ['Joint', 'Joint']]))%>
+</div></div>
+
+
+<div class="string input optional stringish control-group">
+	<%= f.label :opened_on %><div class="controls">
+    <%= f.text_field :opened_on, :value => Date.today, :readonly => true %>
+</div></div>
+
+     <fieldset class="form-actions"> <%= f.submit "Create savingsdeposit", class: "btn btn-primary" %></field>
+    <% end %>
+  </div>
+</div>

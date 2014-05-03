@@ -1,0 +1,103 @@
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1,h4
+{
+  color: #005580
+}
+h3
+{
+
+  color: rgb(144, 16, 16);
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+
+}
+</style>
+
+
+<h1><%= link_to 'Savings Deposit',savingsdeposits_path %></h1>
+
+       <div align = "left">
+     <% if can? :approve, @savingsdeposit %>
+                 <%= form_for @savingsdeposit, url: activate_savingsdeposit_path(@savingsdeposit), :html => { :method => :put } do |f| %>
+                <%= f.submit "approve", class: "btn btn-danger"  %>
+                <% end %>
+                <% end %>
+              </div>
+   
+
+  <div><h3><%= "#{@savingsdeposit.customer.code}" %></h3><h4><%= "#{@savingsdeposit.customer.first_name}" %></h4></div>
+<div>
+<div></div><br>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+        <tr >
+          <th>Opened On</th>
+          <th>Current Balance</th>
+          <th>Status</th>
+        
+        </tr>   
+         <tr>
+          <td><%= @savingsdeposit.opened_on %></td>
+          <td>
+            <%= @savingsdeposit.current_balance %>        
+          </td>
+          <td>
+        <% if @savingsdeposit.status == 'approved' %>
+        <span class="label label-success"><%= @savingsdeposit.status %></span><i class="icon-hand-up"></i>
+        <% elsif @savingsdeposit.status == 'Pending' %>
+        <span class="label label-mini btn-warning"><%= @savingsdeposit.status %></span><i class="icon-hand-down"></i>
+        <% end %>
+           
+          </td>
+          
+           </tr>
+</table>
+<br />
+<div  align = "right">
+<%= link_to 'Daily Product',dailyproduct_path(:id=>@savingsdeposit.id), class: "btn btn-inverse" %>
+</div>
+<br>
+<h3>Transaction History</h3>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+        <tr >
+         <th>transactiontype</th>
+          <th>transactionmode</th>
+          <th>transaction_date</th>
+          <th>transaction_amount</th>
+          <th>status</th>
+          <th>particulars</th>
+
+        </tr>   
+        <% @savingsdeposit.savingsdeposittransactions.each do |p| %>
+         <tr>
+            <td><%= p.transactiontype %></td>
+            <td><%= p.transactionmode %></td>
+            <td><%= p.transaction_date %></td>
+            <td><%= p.transaction_amount %></td>
+            <td> <span class="label label-success"><%= @savingsdeposit.status %></span></td>
+            <td><%= p.particulars %></td>
+            
+         </tr>
+       <% end %>
+</table>
+
+</div>
+ 
+  

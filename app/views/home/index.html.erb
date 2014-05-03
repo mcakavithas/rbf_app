@@ -1,0 +1,96 @@
+
+<link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
+
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1,h3,h2
+{
+  color: #005580
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+
+}
+
+#header_id { display: none }
+</style>
+
+<% if user_signed_in? %>
+
+<h3>Welcome to <%= current_user.username %></h3>
+<%= link_to "List all customers", customers_path, class: "btn btn-primary" %>
+<%= link_to "User Profile", home_show_path, class: "btn btn-primary" %>
+
+<% else %>
+
+<h2 align = "center">RUBY BENEFIT FUND</h2>
+<br> </br>
+<br><%= link_to "Sign In", new_user_session_path, :method => :get, class: "btn btn-success" %> Or <%= link_to "Sign Up", new_user_registration_path, :method => :get, class: "btn btn-success" %></br>
+
+<% end %>
+
+<script>
+$(function(){
+  $('#myCarousel').carousel();
+  interval: 2000
+});
+</script>
+
+<br><br>
+<div id="myCarousel" class="carousel slide">
+  
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="active item">
+        <%= image_tag("bank1.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank2.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank3.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank8.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank5.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank6.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank7.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("it.jpeg", :width=>"1000%", :height=>"200")%>
+    </div>
+    <div class="item">
+    	<%= image_tag("bank9.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+
+    <div class="item">
+      <%= image_tag("bank10.jpg", :width=>"1000%", :height=>"200")%>
+    </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>
+</div>

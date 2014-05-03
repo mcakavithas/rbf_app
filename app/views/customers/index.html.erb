@@ -1,0 +1,77 @@
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1
+{
+  color: #005580
+}
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+
+}
+
+</style>
+
+<h1><%= link_to "Customers", customers_path %></h1>
+
+<%= form_tag customers_path, :method => 'get'  do %>
+   <%= text_field_tag :search, params[:search]%>
+   <%= submit_tag "Search", :first_name => nil, class: "btn btn-primary"  %> <%= link_to "New Customer", new_customer_path , class: "btn btn-primary" %>
+ <% end %>
+<h5 class = "alert alert_info"><%= page_entries_info @customers %></h5>
+<div>
+      
+<div></div><br>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+	<tr >
+   <th>Folio#</th>
+    <th>Customer Id</th>
+		<th>Customer Name</th>
+		<th>Sex</th>
+		<th>Date of birth</th>
+		<th>Address</th>
+		<th>City</th>
+    <th>PAN</th>
+    <th>Photo</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    </tr>
+    
+<% @customers.each do |customer| %>
+    <tr>
+    <td><% for folio in customer.folios %><%= link_to folio.folio_number, folios_path %><% end %></td>
+      <td><%= link_to "#{customer.code}", customer_path(customer) %></td>
+      <td><%= link_to "#{customer.first_name} #{customer.last_name}" , customer_path(customer)%></td>
+      <td><%= customer.sex %></td>
+      <td><%= customer.dob %></td>
+      <td><%= customer.address %></td>
+      <td><%= customer.city %></td>
+      <td><%= customer.pan %></td>
+      <td><%= image_tag customer.image, :size => "50x50", :crop => :fill %></td>
+      <td><span class="label label-mini btn-warning"><%= customer.status %></span><i class="icon-hand-down"></i></td>
+
+      <td><%= link_to "Edit", edit_customer_path(customer) , class: "btn btn-primary" %></td>
+      <td>
+      <%= link_to(customer_path(customer), class: "btn btn-danger", method: :delete, confirm: "Are You Sure?") do %><i class = "icon-question-sign"></i> Delete
+      <% end %>
+       </td>
+    </tr>
+  <% end %>
+</table>
+
+ <%= will_paginate @customers %><br/>

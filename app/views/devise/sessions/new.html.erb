@@ -1,0 +1,74 @@
+<style type="text/css">
+.alert, .alert h4{
+  color:rgb(192,152,83);
+  padding: 8px 35px 8px 14px;
+  margin-bottom: 20px;
+  text-shadow:0pt 1px 0pt rgba(255, 255, 255, 0.5);
+  background-color: rgb(252, 248, 227);
+  border: 1px solid rgb(251, 238, 213);
+  border-radius:2px 2px 2px 2px;
+}
+.sign_in_header{
+	color: rgb(196, 60, 53);
+	line-height: 20px;
+	font-size: 20.5px;
+	font-weight: bold;
+	margin: 8px 0pt;
+	font-family: inherit;
+	text-align: center;
+	/*text-rendering: optimizelegibility;*/
+
+}
+
+.sign_in_label{
+	background: none repeat scroll 0% 0% rgb(0, 100, 205);
+	color: rgb(255, 255, 255);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	padding-left: 1em;
+	margin-bottom: 0px;
+	padding-bottom: 1em;
+	font-size: 24.5px;
+	line-height: 40px;
+	font-size: 100%;
+	width: 320px;
+}
+
+#sign_in{
+	border: 3px solid rgb(0, 100, 205);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	padding: 1em 1em 0em;
+	margin-top: -5px;
+	width: 300px;
+}
+
+.form-actions{
+	padding: 19px 20px 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: rgb(245,245,245);
+	border-top: 1px solid rgb(229,229,229);
+}
+#header_id { display: none }
+
+
+</style>
+
+<div class= "alert alert-alert">You need to sign in or sign up before continuing.</div>
+<h1 class="sign_in_header"><i>Ruby Benefit Fund</i></h1>
+<h3 class="sign_in_label">Sign in</h3>
+<div id="sign_in">
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+    <fieldset class="form-actions"> <%= f.submit "Sign in" %></field>
+
+  
+<% end %>
+</div>

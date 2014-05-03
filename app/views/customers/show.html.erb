@@ -1,0 +1,79 @@
+<style type="text/css">
+.customer{
+  border-bottom: 2.5px solid rgb(0,136,204);
+}
+
+h4,h1,h2,h3,h5
+{
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 20px;
+  color: inherit;
+}
+</style>
+
+<div class="row">
+<h1><%= link_to "Customers", customers_path %></h1><br>
+<div class='row'>
+<div class='span6 offset6'>
+<div><%= link_to "Edit", edit_customer_path(@customer) , class: "btn btn-primary" %> <%= link_to "Delete",customer_path(@customer), class: "btn btn-danger", method: :delete, confirm: "Are You Sure?" %></div>
+</div>
+</div>
+</div>
+
+  <h3><span class = "customer"><%= @customer.code %></span></h3><br>
+   <h3><%= "#{@customer.first_name}#{@customer.last_name}" %></h3>
+   <h5><%= "The Customer date of birth : #{@customer.dob} " %></h5>
+	 <h5><%= "The customer age : #{((DateTime.now - @customer.dob) / 365.25).to_i}" %></h5>
+   <hr>
+
+   <div class="row">
+   <div class="span6 customer_left_span_properties">
+   <h4><span class="customer">Application details</span></h4>
+   <div class="row">
+   <div class="span3">
+    <strong>Folio#</strong>
+   </div>
+   <div class="span3"> - <% for folio in @customer.folios %><%= link_to folio.folio_number, folios_path %><% end %> </div>
+   </div>
+
+   <div class="row">
+   <div class="span3">
+   <strong>No Of Shares</strong>
+   </div>
+   <div class="span3"> - <% for folio in @customer.folios %><%= link_to folio.no_of_shares, folios_path %><% end %> </div>
+   </div>
+   </div>
+ 
+   <div class="span6">
+   <h4><span class="customer">ID details</span></h4>
+   <div class="row">
+   <div class="span3">
+   <strong>PAN</strong>
+   </div>
+   <div class="span3"> : <%= @customer.pan %> </div>
+   </div>
+   </div>
+   <div class="span3">
+   <strong>Photo</strong>
+   </div> 
+   <div class="span3"> : <%= image_tag @customer.image, :size => "50x50", class: "img-circle" %></div>
+   </div>
+<hr>
+  <div class="row">
+   <div class="span6 customer_left_span_properties">
+   <h4><span class="customer">Customer details</span></h4>
+   <div class="row">
+   <div class="span3">
+    <strong>DOB</strong>
+   </div>
+   <div class="span3"> - <%=  @customer.dob %></div>
+   </div>
+
+   <div class="row">
+   <div class="span3">
+   <strong>Gender</strong>
+   </div>
+   <div class="span3"> - <%= @customer.sex %></div>
+   </div>
+   </div>

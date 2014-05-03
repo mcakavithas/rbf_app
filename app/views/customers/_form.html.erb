@@ -1,0 +1,86 @@
+<style>  
+label.required:after {
+    content: " *";
+    color: red;
+    cursor: help;
+}
+</style>
+  <%= form_for @customer, :html => {:multipart => true} do |f| %>
+  
+  <% if @customer.errors.any? %>
+<h4>Customer not added</h4>
+<ul>
+<% @customer.errors.full_messages.each do |error| %>
+<li><%= error %></li>
+<% end %>
+</ul>
+<% end %>
+
+ 
+<div class='row'>
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_first_name_input"><%= f.label :first_name, class: 'required' %><div class="controls"><%= f.text_field :first_name %>
+</div></div>
+</div>
+
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_last_name_input"><%= f.label :last_name, class: 'required' %><div class="controls"><%= f.text_field :last_name %>
+</div></div>
+</div>
+</div>
+    <%= f.label :dob, class: 'required' %>
+    <%= f.date_select :dob, { :include_blank => true, :start_year => 1900, :end_year => 2014 } %>
+
+	  <%= f.label :sex, class: 'required' %>
+    <%= f.select(:sex, options_for_select([['M', 'Male'], ['F', 'Female']]))%>
+    
+
+      <%= f.label :address, class: 'required' %>
+      <%= f.text_area :address, :id => "address", :cols => 5, :rows => 3 %>
+      
+
+<div class='row'>
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_city_input"><%= f.label :city, class: 'required' %><div class="controls"><%= f.text_field :city %>
+</div></div>
+</div>
+
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_state_input"><%= f.label :state, class: 'required' %><div class="controls"><%= f.text_field :state %>
+</div></div>
+</div>
+</div>
+
+<div class='row'>
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_pincode_input"><%= f.label :pincode, class: 'required' %><div class="controls"><%= f.text_field :pincode %>
+    </div></div>
+</div>
+
+<div class='span6'>
+  <div class="string input optional stringish control-group" id="customer_pan_input"><%= f.label :pan, class: 'required' %><div class="controls"><%= f.text_field :pan %>
+</div></div>
+</div>
+
+<div class='row'>
+<div class='span6'>
+<div class="string input optional stringish control-group" id="customer_image_input"><%= f.label :Photo, class: 'required' %><div class="controls">
+     <%= f.file_field :image %>
+    </div></div>
+</div>
+
+<%= f.fields_for :folios do |bro|%>
+<div class='row'>
+  <div class='span6'>
+ <div class="string input optional stringish control-group"> 
+ <%= bro.label :no_of_shares, class: 'required' %><div class="controls">
+ <%= bro.text_field :no_of_shares %></div></div>
+</div>
+
+<% end %>
+
+           
+     <fieldset class="form-actions"> <%= f.submit "Create Customer", class: "btn btn-primary" %></field>
+    <% end %>
+  </div>
+</div>

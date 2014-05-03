@@ -1,0 +1,51 @@
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1
+{
+  color: #005580
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+}
+</style>
+<br>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+	<tr >
+ 		<th>Account Type</th>
+		<th>Opened On</th>
+		<th>Current Balance</th>
+		<th>Customer Name</th>
+    <th>Status</th>
+  </tr>
+  
+    <% @savingsdeposits.each do |savingsdeposit| %>
+    <% if savingsdeposit.status == 'Pending' %>
+   <tr>
+  	  <td><%= link_to "#{savingsdeposit.account_type}", approve_savingsdeposit_path(savingsdeposit) %></td>
+      <td><%= savingsdeposit.opened_on %></td>
+      <td><%= savingsdeposit.current_balance %></td>
+      <td><%= link_to "#{savingsdeposit.customer.first_name}",customers_path if savingsdeposit.customer %></td>
+      <td>
+        <span class="label label-mini btn-warning"><%= savingsdeposit.status %></span><i class="icon-hand-down"></i>
+      </td>
+      </tr>
+       <% end %>
+ <% end %>
+
+</table>

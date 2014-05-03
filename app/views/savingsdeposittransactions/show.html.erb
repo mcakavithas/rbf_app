@@ -1,0 +1,71 @@
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h1,h4
+{
+  color: #005580
+}
+h3
+{
+
+  color: rgb(144, 16, 16);
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+
+}
+</style>
+
+<div align = "right">
+     <% if can? :approve, @savingsdeposittransaction %>
+      <%= form_for @savingsdeposittransaction, url: activate_savingsdeposittransaction_path(@savingsdeposittransaction), :html => { :method => :put } do |f| %>
+        <%= f.submit "approve", class: "btn btn-danger"  %>
+         <% end %>
+         <% end %>
+</div>
+
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+        <tr >
+          <th>transactiontype</th>
+          <th>transactionmode</th>
+          <th>transaction_date</th>
+          <th>transaction_amount</th>
+           <th>status</th>
+        </tr>   
+         <tr>
+          <td><%= @savingsdeposittransaction.transactiontype %></td>
+          <td>
+            <%= @savingsdeposittransaction.transactionmode %>        
+          </td>
+		       <td>
+            <%= @savingsdeposittransaction.transaction_date %>        
+          </td>
+ 			    <td>
+            <%= @savingsdeposittransaction.transaction_amount %>        
+          </td>
+        <td>
+        <% if @savingsdeposittransaction.status == 'approved' %>
+        <span class="label label-success"><%= @savingsdeposittransaction.status %></span><i class="icon-hand-up"></i>
+        <% elsif @savingsdeposittransaction.status == 'Pending' %>
+        <span class="label label-mini btn-warning"><%= @savingsdeposittransaction.status %></span><i class="icon-hand-down"></i>
+        <% end %>
+          </td>
+         </tr>
+</table>
+
+

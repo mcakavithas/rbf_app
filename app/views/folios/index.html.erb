@@ -1,0 +1,54 @@
+<link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap.css" rel="stylesheet">
+
+<style>
+table, td, th
+{
+border:1px solid green;
+}
+th
+{
+background-color:#8AC38A;
+color:white;
+}
+h2
+{
+  color: #005580
+}
+
+.alert,.alert_info,.alerth5{
+background-color: rgb(217,237,247);
+border-color: rgb(188,232,241);
+color: rgb(58,135,173);
+padding: 8px 35px 8px 14px;
+margin-bottom: 20px;
+text-shadow: 0pt 1px 0pt rgba(255, 255, 255, 0.5);
+border: 1px solid rgb(251, 238, 213);
+border-radius: 4px 4px 4px 4px;
+
+}
+
+</style>
+
+
+<div>
+   
+<h2>Customer Folio Details</h2>
+<table cellpadding = "5px" cellspacing = "5px" width = "100%" class="zebra-striped">
+	<tr >
+    <th>Customer Name</th>
+    <th>Folio allocation date</th>
+		<th>Folio Number</th>
+		<th>No_of_shares</th>
+	   </tr>
+<% @folios.each do |folio| %>
+    <tr>
+      <td><%= folio.customer_id %></td>
+      <td><%= folio.folio_allocation_date %></td>
+      <td><%= folio.folio_number %></td>
+      <td><%= folio.no_of_shares %></td>
+      </tr>
+  <% end %>
+</table>
+
+</div>
+ 
